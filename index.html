@@ -20,44 +20,44 @@
       --text-dark: #181818;
     }
     /* --- Video background and overlay styles --- */
-.bg-video-container {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  overflow: hidden;
-  background: #fff;
-}
-.bg-video {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  min-height: 950px;
-  object-fit: cover;
-  z-index: 0;
-  transition: filter 0.5s;
-}
-.bg-overlay {
-  position: absolute;
-  left: 0; top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1;
-  pointer-events: none;
-  background: rgba(234,246,250,0.10);
-  backdrop-filter: blur(4px) saturate(115%);
-  transition: background 0.3s, backdrop-filter 0.3s;
-}
-body.with-overlay .bg-overlay {
-  background: rgba(234,246,250,0.22);
-  backdrop-filter: blur(12px) saturate(120%);
-}
-body.with-overlay .bg-video {
-  filter: blur(9px);
-}
- html, body {
+    .bg-video-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+      background: #fff;
+    }
+    .bg-video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      min-height: 950px;
+      object-fit: cover;
+      z-index: 0;
+      transition: filter 0.5s;
+    }
+    .bg-overlay {
+      position: absolute;
+      left: 0; top: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      background: rgba(234,246,250,0.10);
+      backdrop-filter: blur(4px) saturate(115%);
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    body.with-overlay .bg-overlay {
+      background: rgba(234,246,250,0.22);
+      backdrop-filter: blur(12px) saturate(120%);
+    }
+    body.with-overlay .bg-video {
+      filter: blur(9px);
+    }
+    html, body {
       margin: 0;
       padding: 0;
       height: 100%;
@@ -637,7 +637,7 @@ body.with-overlay .bg-video {
     .skills-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 9px;}
     .skill-tag { background: var(--accent-green); color: #fff; border-radius: 9px; padding: 3px 8px; font-size: 0.98rem;}
     .motivation-text { padding: 2.1rem 2rem 2.1rem 1.6rem; font-size: 1.13rem; text-align: center; }
-   </style>
+  </style>
 </head>
 <body>
   <div class="bg-video-container">
@@ -652,8 +652,6 @@ body.with-overlay .bg-video {
     ></video>
     <div class="bg-overlay"></div>
   </div>
-</head>
-<body>
   <div class="split-layout">
     <div class="sidebar">
       <div class="sidebar-header">
@@ -1152,6 +1150,7 @@ var skills = [
   </script>
 </body>
 </html>
+
 
 
 
