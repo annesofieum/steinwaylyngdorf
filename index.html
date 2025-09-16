@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anne Sofie Uhrskov Mikkelsen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --background: #eaf6fa;
+  --primary: #217a7e;
+  --secondary: #99c9c2;
+  --accent: #cde8df;
+  --soft-green: #cde8df;
+  --title-green: #294231;
+  --card-bg: rgba(255,255,255,0.80);
+  --card-bg-mobile: rgba(255,255,255,0.65);
+  --text-dark: #294231;
+  --highlight: #b7e6ff;
+  --border-radius: 22px;
+  --box-shadow: 0 6px 32px rgba(33,122,126,0.10), 0 1px 4px rgba(33,122,126,0.08);
+}
+/* --- Video background and overlay styles --- */
+.bg-video-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  background: #fff;
+}
+.bg-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: 950px;
+  object-fit: cover;
+  z-index: 0;
+  transition: filter 0.5s;
+}
+.bg-overlay {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(234,246,250,0.10);
+  backdrop-filter: blur(4px) saturate(115%);
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
+body.with-overlay .bg-overlay {
+  background: rgba(234,246,250,0.22);
+  backdrop-filter: blur(12px) saturate(120%);
+}
+body.with-overlay .bg-video {
+  filter: blur(9px);
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--background);
+  font-family: 'Playfair Display', serif;
+  color: var(--text-dark);
+  font-weight: 400;
+  min-height: 100vh;
+  box-sizing: border-box;
+  cursor: url('/compass-cursor.png') 16 16, auto;
+  overscroll-behavior: none;
+}
+.split-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+}
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  width: 340px;
+  min-width: 210px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0 0 32px;
+  box-sizing: border-box;
+  z-index: 3;
+  border-right: none;
+  box-shadow: 0 2px 22px 0 #dbeada1a;
+}
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  height: 210px;
+  width: 100%;
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 34px;
+}
+.name-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--title-green);
+  letter-spacing: 0.02em;
+  line-height: 1.12;
+  white-space: pre-line;
+  font-family: var(--font-title);
+  width: 100%;
+  text-align: left;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-left: 1rem;
+  margin-top: 0;
+  padding: 0;
+  width: auto;
+  background: none;
+  box-shadow: none;
+}
+.menu a {
+  display: inline-block;
+  font-size: 1.11rem;
+  color: var(--title-green);
+  text-decoration: none;
+  padding: 0.19em 0.95em;
+  border-radius: 22px;
+  transition: background 0.16s, color 0.14s, transform 0.18s, box-shadow 0.15s;
+  cursor: pointer;
+  opacity: 0.7;
+  letter-spacing: 0.01em;
+  font-weight: 500;
+  background: none;
+  box-shadow: none;
+  margin: 0;
+  min-width: 0;
+}
+.menu a.active, .menu a:hover {
+  background: var(--soft-green);
+  color: var(--accent-green);
+  opacity: 1;
+  transform: translateX(7px) scale(1.07);
+  box-shadow: 0 2px 12px 0 #b6c7b433;
+  border-radius: 22px;
+}
+.menu a:active {
+  background: #def0de;
+  color: #1f3324;
+  transform: translateX(2px) scale(0.98);
+}
+.content-area {
+  flex: 1;
+  min-height: 100vh;
+  background: transparent;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  overflow: auto;
+  margin-left: 340px;
+}
+.front-image {
+  display: none;
+}
+.section-content {
+  display: none;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  border-radius: var(--border-radius);
+  min-height: 350px;
+  max-height: none;
+  overflow: visible;
+  font-weight: 400;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+}
+.section-content.active {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeInUp 0.45s cubic-bezier(.6,.01,.35,1.02);
+  position: static;
+}
+.big-section-box,
+.om-mig-box,
+.mapping-box {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 24px #b6c7b414;
+  margin: 2vw auto 3vw auto;
+  padding: 4vw 4vw 3vw 4vw;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* OM MIG */
+.om-mig-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 14px;
+  color: #294231;
+}
+.om-mig-desc {
+  text-align: center;
+  font-size: 1.16rem;
+  margin-bottom: 22px;
+  color: #294231;
+  line-height: 1.46;
+}
+.stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 28px;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+.stat-card {
+  background: rgba(234,246,250,0.10);
+  border-radius: 18px;
+  box-shadow: 0 1px 8px rgba(33,122,126,0.07);
+  text-align: center;
+  padding: 18px 28px 10px 28px;
+  min-width: 170px;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.stat-card-bold {
+  font-weight: 700;
+  font-size: 1.45rem;
+  color: #294231;
+  margin-bottom: 3px;
+}
+.stat-card-label {
+  font-size: 1.08rem;
+  color: #294231;
+  opacity: 0.8;
+}
+hr {
+  border: none;
+  border-top: 1px solid #d7e6e0;
+  margin: 18px 0 18px 0;
+}
+.contact-lang-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 300px;
+  margin-top: 0;
+}
+.contact-col, .lang-col {
+  flex: 1 1 0;
+}
+.contact-col {
+  min-width: 240px;
+  max-width: 340px;
+  padding-right: 20px;
+}
+.contact-item, .address-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  flex-wrap: nowrap; /* Prevent line break! */
+}
+.contact-label {
+  min-width: 90px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.contact-value {
+  display: inline-block;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+.contact-title, .lang-title {
+  font-size: 1.28rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #294231;
+}
+.lang-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 1.08rem;
+  margin-bottom: 4px;
+}
+.lang-label {
+  font-weight: 600;
+  min-width: 70px;
+}
+.lang-value {
+  color: #294231;
+}
+.address-row {
+  margin-top: 5px;
+}
+
+/* Responsive: do NOT stack label/value on mobile */
+@media (max-width: 700px) {
+  .contact-col {
+    max-width: 100vw;
+    min-width: 0;
+    padding-right: 0;
+  }
+  .contact-item, .address-row {
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: nowrap;
+  }
+  .contact-label, .contact-value {
+    display: inline-block;
+    min-width: 0;
+    white-space: nowrap;
+  }
+}
+/* Rest of CSS unchanged... */
+/* KOMPETENCER/MAPPING */
+.mapping-headline {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--title-green);
+  margin: 0 0 0.37em 0;
+  text-align: center;
+}
+.mapping-desc {
+  font-size: 1.15rem;
+  margin-bottom: 2.1vw;
+  color: #232323;
+  font-weight: 400;
+  text-align: center;
+}
+.mapping-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  align-items: stretch;
+  margin-bottom: 2vw;
+  justify-content: center;
+  min-height: 370px;
+}
+.mapping-left {
+  flex: 0 1 510px;
+  min-width: 410px;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: none;
+}
+.radar-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--title-green);
+  margin: 1.8vw 0 1.7vw 0;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+#skillChart {
+  width: 400px !important;
+  height: 400px !important;
+  min-width: 340px;
+  min-height: 340px;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  overflow: visible;
+}
+.radar-legend-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 2.3em;
+}
+.mapping-legendbox {
+  background: #fff;
+  border-radius: 14px;
+  margin: 0;
+  padding: 1.5em 2em 1.1em 2em;
+  box-shadow: 0 2px 10px #b6c7b410;
+  color: var(--title-green);
+  border: 1.5px solid var(--soft-green);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 340px;
+  max-width: 430px;
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.12rem;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+.legend-color {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 6px 0 0;
+  vertical-align: middle;
+}
+.legend-dark { background: var(--legend-dark); }
+.legend-light { background: var(--legend-light); }
+.mapping-niveau {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1.3rem;
+  gap: 4px;
+  font-size: 1.08rem;
+  text-align: left;
+  width: 100%;
+}
+.niveau-title {
+  margin-bottom: 7px;
+}
+.mapping-niveau b {
+  font-weight: 600;
+  font-size: 1.08rem;
+}
+.mapping-right {
+  flex: 1 1 0;
+  min-width: 340px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
+  justify-content: flex-start;
+  overflow: visible !important;
+  max-width: 99vw;
+}
+.mapping-detail-card {
+  background: rgba(255,255,255,0.92);
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(33,122,126,0.08);
+  color: #294231;
+  padding: 2.2rem 2.2rem 2.1rem 2.2rem;
+  margin-bottom: 0.7vw;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: none;
+  overflow: visible;
+  max-width: none;
+  word-break: normal;
+  white-space: normal;
+}
+.mapping-detail-title { font-size: 1.26rem; font-weight: 700; margin-bottom: 0.7rem; }
+.mapping-detail-prolevel {
+  background: #fff;
+  color: var(--title-green);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 2.5px 14px;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--soft-green);
+}
+.mapping-detail-desc { font-size: 1.08rem; margin-bottom: 1.1rem;}
+.competency-section {
+  background: var(--soft-green);
+  border-radius: 13px;
+  padding: 13px 14px;
+  margin-bottom: 10px;
+  color: var(--title-green);
+  font-size: 1.07rem;
+}
+.competency-section h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.05rem;
+  color: var(--title-green);
+  font-weight: 700;
+}
+.competency-section p {
+  margin: 0;
+  font-size: 1.07rem;
+  color: #294231;
+  font-weight: 400;
+}
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--title-green);
+  margin-top: 0;
+  margin-bottom: 1.35rem;
+  text-align: center;
+}
+.profile-description {
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  line-height: 1.62;
+  max-width: 900px;
+  text-align: center;
+}
+.centered-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+}
+.experience-item {
+  background: #fff;
+  border-radius: 13px;
+  margin-bottom: 0;
+  padding: 0.6rem 2rem 0.6rem 1.6rem;
+  box-shadow: 0 1px 8px #b6c7b110;
+  border: 1.5px solid var(--soft-green);
+  width: 100%;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.6rem;
+  cursor: pointer;
+  transition: box-shadow 0.18s, transform 0.16s;
+  position: relative;
+}
+.experience-item.active, .experience-item:active {
+  box-shadow: 0 6px 26px #7e9c8577;
+  transform: scale(1.025);
+}
+.experience-header {
+  border: none;
+  background: none;
+  padding: 0.8rem 0;
+  font-weight: 700;
+  color: var(--title-green);
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.experience-header::after {
+  content: "Klik for detaljer";
+  position: absolute;
+  right: 4px;
+  top: 1.2rem;
+  font-size: 0.8rem;
+  color: #a3b3a8;
+  font-weight: 400;
+}
+.experience-title { font-weight: 700; font-size: 1.13rem; margin-bottom: 0; }
+.experience-company { font-size: 0.98rem; opacity: 0.9; font-weight: 400;}
+.experience-details {
+  padding: 0.5rem 0 1.1rem 0;
+  background: #f8faf7;
+  border-top: 1px solid var(--soft-green);
+  display: none;
+  font-weight: 400;
+  animation: fadeInUp 0.3s;
+  margin-top: 1rem;
+}
+.experience-details.active {
+  display: block;
+}
+.skills-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 9px;}
+.skill-tag {
+  background: #217a7e;
+  color: #fff;
+  border-radius: 9px;
+  padding: 3px 8px;
+  font-size: 0.98rem;
+}
+.motivation-text { padding: 2.1rem 2rem 2.1rem 1.6rem; font-size: 1.13rem; text-align: center; }
+@media (max-width: 1100px) {
+  .big-section-box,
+  .om-mig-box,
+  .mapping-box {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(8px) saturate(120%);
+    border: 1.5px solid var(--accent);
+    padding: 3vw 4vw 2vw 4vw;
+    margin: 2vw auto 3vw auto;
+    max-width: 900px;
+    min-width: 0;
+    transition: box-shadow 0.18s, transform 0.14s;
+  }
+  .big-section-box:hover, .om-mig-box:hover, .mapping-box:hover {
+    box-shadow: 0 12px 40px rgba(58,143,231,0.13), 0 2px 8px rgba(58,143,231,0.09);
+    transform: scale(1.012);
+  }
+  .section-title, .radar-title, .om-mig-title, .mapping-headline {
+    color: var(--primary);
+  }
+  .menu a {
+    color: var(--primary);
+  }
+  .menu a.active, .menu a:hover {
+    background: var(--highlight);
+    color: var(--text-dark);
+  }
+}
+@media (max-width: 700px) {
+  .sidebar {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100vw;
+    min-width: 0;
+    height: auto;
+    position: static;
+    padding: 0 0 0 5vw;
+    box-shadow: none;
+  }
+  .sidebar-header {
+    margin-top: 10px;
+    margin-bottom: 0;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .name-title {
+    font-size: 1.3rem;
+    text-align: left;
+    margin-bottom: 9px;
+    width: 100%;
+    line-height: 1.1;
+  }
+  .menu {
+    flex-direction: column;
+    gap: 0;
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .menu a {
+    font-size: 1.1rem;
+    padding: 0.5em 0.5em;
+    display: block;
+    width: 100%;
+    text-align: left;
+    border-radius: 0;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
+  }
+  .menu a.active, .menu a:hover {
+    background: var(--soft-green);
+    color: var(--accent-green);
+    opacity: 1;
+    border-radius: 0;
+    transform: none;
+    box-shadow: none;
+  }
+  .content-area {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .big-section-box,
+  .om-mig-box,
+  .mapping-box {
+    padding: 4vw 2vw;
+    min-width: 0;
+    width: 98vw;
+    box-sizing: border-box;
+    max-width: 100vw;
+  }
+  .section-content,
+  .big-section-box,
+  .om-mig-box,
+  .mapping-box {
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .stats-row,
+  .contact-lang-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .stat-card,
+  .contact-col,
+  .lang-col {
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .mapping-flex {
+    flex-direction: column;
+    gap: 15px;
+    min-height: 0;
+  }
+  #skillChart {
+    width: 95vw !important;
+    min-width: 0 !important;
+    height: 220px !important;
+  }
+  .om-mig-title,
+  .mapping-headline,
+  .radar-title,
+  .section-title {
+    font-size: 1.2rem !important;
+  }
+  .om-mig-desc,
+  .mapping-desc,
+  .profile-description {
+    font-size: 1rem !important;
+  }
+  .experience-title,
+  .experience-company {
+    font-size: 1rem !important;
+  }
+  .front-image {
+    min-height: 30vh;
+    height: auto;
+    max-width: 100vw;
+    object-fit: cover;
+  }
+  .mapping-legendbox {
+    min-width: 0;
+    max-width: 100vw;
+    padding: 1.1em 1.2em 1em 1.2em;
+  }
+}
+/* General centering helpers */
+.centered-content,
+.profile-description {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+}
+/* Motivation-specific fix: override inline style */
+#motivation-section .profile-description {
+  max-width: 900px !important;
+  text-align: center !important;
+}
+/* Left-align for certain sections */
+#erfaring-section .profile-description,
+#uddannelse-section .profile-description,
+#motivation-section .profile-description,
+#erfaring-section .experience-list,
+#uddannelse-section .experience-list {
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+  </style>
+</head>
+<body>
+  <div class="bg-video-container">
+    <video
+      src="profile-video.mp4"
+      class="bg-video"
+      id="bgvideo"
+      autoplay
+      loop
+      muted
+      playsinline
+    ></video>
+    <div class="bg-overlay"></div>
+  </div>
+  <div class="split-layout">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="name-title">Anne Sofie Uhrskov<br>Mikkelsen</div>
+      </div>
+      <nav class="menu">
+        <a href="#" data-section="front" class="active">Forside</a>
+        <a href="#" data-section="ommig">Det praktiske</a>
+        <a href="#" data-section="kompetencer">Kompetencer Radar</a>
+        <a href="#" data-section="erfaring">Stoppesteder</a>
+        <a href="#" data-section="uddannelse">Uddannelsesruter</a>
+        <a href="#" data-section="motivation">Eventyrlyst</a>
+      </nav>
+    </div>
+    <div class="content-area">
+      <!-- Forside (blank as requested) -->
+      <div class="section-content" id="front-section"></div>
+      <!-- Om Mig -->
+      <div class="section-content" id="ommig-section">
+        <div class="om-mig-box">
+          <div class="om-mig-title">Struktureret koordinator med kreativt drive</div>
+          <div class="om-mig-desc">
+            Erfaren koordinator med en god blanding af struktur og kreativt kaos.<br>
+            Specialist i at holde overblikket, samle folk om fællesmål og løse problemer når de opstår.<br>
+            Passioneret omkring marketing der vækker følelser og nysgerrighed.<br>
+            I søger noget nyt, og jeg søger en kreativ udfordring!
+          </div>
+          <div class="stats-row">
+            <div class="stat-card">
+              <span class="stat-card-bold">50+</span>
+              <div class="stat-card-label">Brands koordineret</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card-bold">3+</span>
+              <div class="stat-card-label">Års erfaring</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card-bold">Nyligt Afsluttet</span>
+              <div class="stat-card-label">Projektledelses kursus</div>
+            </div>
+          </div>
+          <hr>
+          <div class="contact-lang-row">
+            <div class="contact-col">
+              <div class="contact-title">Kontakt</div>
+              <div class="contact-item">
+                <span class="contact-label">Email:</span>
+                <span class="contact-value">annesofieum@outlook.dk</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label">Telefon:</span>
+                <span class="contact-value">+45 20517479</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label">LinkedIn:</span>
+                <a href="https://www.linkedin.com/in/anne-sofie-uhrskov-mikkelsen-7a3349197" target="_blank" class="contact-value">Anne Sofie Uhrskov Mikkelsen</a>
+              </div>
+              <div class="address-row">
+                <span class="contact-label">Adresse:</span>
+                <span class="contact-value">Højbjerg Huse 36, 8840 Rødkærsbro, Danmark</span>
+              </div>
+            </div>
+            <div class="lang-col">
+              <div class="lang-title">Sprog</div>
+              <div class="lang-item"><span class="lang-label">Dansk</span><span class="lang-value" style="margin-left:auto;">Modersmål</span></div>
+              <div class="lang-item"><span class="lang-label">Engelsk</span><span class="lang-value" style="margin-left:auto;">Flydende</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Kompetencer -->
+      <div class="section-content" id="kompetencer-section">
+        <div class="mapping-box">
+          <div class="mapping-headline">Kompetence Mapping</div>
+          <div class="mapping-desc">
+            Interaktiv visualisering af mine kompetencer relevante for rollen som Content Magiker hos DanExplore.
+          </div>
+          <div class="mapping-flex">
+            <div class="mapping-left">
+              <div class="radar-title">Kompetence Radar</div>
+              <svg id="skillChart"></svg>
+              <div class="radar-legend-wrap">
+                <div class="mapping-legendbox">
+                  <div class="legend">
+                    <span class="legend-color legend-dark"></span>
+                    <span>Rejseleder-niveau (Guide/Ekspert på ruten)</span>
+                  </div>
+                  <div class="legend">
+                    <span class="legend-color legend-light"></span>
+                    <span>Nye destinationer (Udviklingsområder)</span>
+                  </div>
+                  <div class="mapping-niveau">
+                    <div class="niveau-title"><b>Kompetence Niveauer:</b></div>
+                    <div><b>Niveau 1:</b> Backpacker</div>
+                    <div><b>Niveau 2:</b> Eventyrer</div>
+                    <div><b>Niveau 3:</b> Opdagelsesrejsende</div>
+                    <div><b>Niveau 4:</b> Guide</div>
+                    <div><b>Niveau 5:</b> Rejseekspert</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mapping-right skill-details">
+              <div class="mapping-detail-card default-message">
+                <div class="mapping-detail-title" style="font-size:1.13rem;">Klik på en kompetence</div>
+                <div class="mapping-detail-desc">Klik på et punkt eller navn i radaren for at se detaljeret information om mine kompetencer og erfaring.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Erfaring -->
+      <div class="section-content" id="erfaring-section">
+        <div class="big-section-box">
+          <div class="section-title">Relevant Erfaring</div>
+          <div class="profile-description">
+            Min professionelle baggrund og hvordan disse erfaringer oversættes til jobbet som Content Magiker hos DanExplore.
+          </div>
+          <div class="centered-content">
+            <div class="experience-list">
+              <div class="experience-item" onclick="toggleExperience('adjutant')" id="adjutant-item">
+                <div class="experience-header">
+                  <div class="experience-title">Marketplace Manager</div>
+                  <div class="experience-company">Adjutant (Marts 2022 – November 2024) • Høj relevans</div>
+                </div>
+                <div id="adjutant-details" class="experience-details">
+                  <div class="skills-grid">
+                    <div class="skill-tag">Projektkoordination</div>
+                    <div class="skill-tag">Team Ledelse</div>
+                    <div class="skill-tag">Performance Tracking</div>
+                    <div class="skill-tag">Tværfagligt Samarbejde</div>
+                    <div class="skill-tag">Visuel kommunikation</div>
+                  </div>
+                  <div class="skills-grid" style="margin-bottom: 10px;">
+                    <span class="skill-tag" style="background:#d1e7f7;color:#294231;">PowerBI</span>
+                    <span class="skill-tag" style="background:#f7ecd1;color:#294231;">Excel</span>
+                  </div>
+                  <ul>
+                    <li>Koordinerede back-office og daily operations for 50+ brands</li>
+                    <li>Analyserede salgsdata og markedstendenser til at hjælpe med strategiske beslutninger</li>
+                    <li>Opdaterede brand homes på Zalando for at sikre god visuel kommunikation og engagement</li>
+                    <li>Ledede og trænede studentermedhjælper mens jeg beholdt overblikket over alle brand operationer</li>
+                  </ul>
+                  <p><strong>Case:</strong> Med over 50 brands i porteføljen var det afgørende for mig at skabe struktur, så jeg kunne bevare overblikket – ikke bare over egne opgaver, men også for teamet. Jeg udviklede systemer til opgavestyring, der sikrede, at alle deadlines blev overholdt, og at intet blev overset. Det gav mig ikke kun ro til at løse mine egne opgaver effektivt, men gjorde det også muligt at oplære og støtte vores studentermedhjælper i hendes udvikling. Hun blev hurtigt selvkørende, og vi fik både mere kvalitet og mindre stress i teamet.</p>
+                </div>
+              </div>
+              <div class="experience-item" onclick="toggleExperience('sofie')" id="sofie-item">
+                <div class="experience-header">
+                  <div class="experience-title">Kreativ Medarbejder</div>
+                  <div class="experience-company">Sofie Ladefoged (Januar 2022 – Marts 2022) • Medium relevans</div>
+                </div>
+                <div id="sofie-details" class="experience-details">
+                  <div class="skills-grid">
+                    <div class="skill-tag">Content Creation</div>
+                    <div class="skill-tag">Brand Communication</div>
+                    <div class="skill-tag">Storytelling</div>
+                  </div>
+                  <div class="skills-grid" style="margin-bottom: 10px;">
+                    <span class="skill-tag" style="background:#d1e7f7;color:#294231;">Adobe</span>
+                    <span class="skill-tag" style="background:#f7ecd1;color:#294231;">Later</span>
+                    <span class="skill-tag" style="background:#d1f7e7;color:#294231;">Wordpress</span>
+                    <span class="skill-tag" style="background:#f7d1e5;color:#294231;">Klaviyo</span>
+                    <span class="skill-tag" style="background:#f7f3d1;color:#294231;">Meta introduktion</span>
+                  </div>
+                  <ul>
+                    <li>Udviklede indhold og nyhedsbreve med fokus på bæredygtige produkter</li>
+                    <li>Arbejdede med storytelling og kommunikation på SOME kanaler</li>
+                    <li>Bidrog til brandets visuelle udtryk og marketingmaterialer</li>
+                  </ul>
+                  <p><strong>Case:</strong> Jeg fik ansvaret for at udvikle e-mailmarketing via Klaviyo, hvilket startede med et opstartsmøde med Klaviyos eget team for at forstå mulighederne i platformen. Derefter udarbejdede jeg en konkret strategi og stod for både opsætning af flows, contentplan og copywriting.</p>
+                </div>
+              </div>
+              <div class="experience-item" onclick="toggleExperience('salling')" id="salling-item">
+                <div class="experience-header">
+                  <div class="experience-title">Indkøbspraktikant</div>
+                  <div class="experience-company">Salling Group (August 2020 – December 2020) • Medium relevans</div>
+                </div>
+                <div id="salling-details" class="experience-details">
+                  <div class="skills-grid">
+                    <div class="skill-tag">Markedsresearch</div>
+                    <div class="skill-tag">Data Analyse</div>
+                  </div>
+                  <div class="skills-grid" style="margin-bottom: 10px;">
+                    <span class="skill-tag" style="background:#f7ecd1;color:#294231;">Excel</span>
+                    <span class="skill-tag" style="background:#e7d1f7;color:#294231;">SAP</span>
+                  </div>
+                  <ul>
+                    <li>Indsamlede markedsindsigter gennem dataanalyse og kundefeedback til sortimentsoptimering</li>
+                    <li>Koordinerede udviklingsprojekter mellem indkøb, marketing og supply chain teams</li>
+                    <li>Bookede ordre og koordinerede med logistik</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="experience-item" onclick="toggleExperience('lemanagement')" id="lemanagement-item">
+                <div class="experience-header">
+                  <div class="experience-title">Art Direct</div>
+                  <div class="experience-company">Le Management (Marts 2016 – August 2018) • Medium relevans</div>
+                </div>
+                <div id="lemanagement-details" class="experience-details">
+                  <div class="skills-grid">
+                    <div class="skill-tag">Porteføljestyring</div>
+                    <div class="skill-tag">Visuel Identitet</div>
+                    <div class="skill-tag">Content Management</div>
+                  </div>
+                  <div class="skills-grid" style="margin-bottom: 10px;">
+                    <span class="skill-tag" style="background:#d1f7e7;color:#294231;">Wordpress</span>
+                  </div>
+                  <ul>
+                    <li>Backoffice for hjemmesiden og ansvar for alle udenlandske modellers porteføljer</li>
+                    <li>Skabte og vedligeholdt det visuelle udtryk online for modellerne</li>
+                    <li>Samarbejdede tæt med model management og IT for at optimere brugeroplevelsen</li>
+                  </ul>
+                  <p><strong>Case:</strong> Jeg hjalp med at opdatere modellers porteføljer og sørgede for at de havde det rette udtryk til de rette kunder.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Uddannelse -->
+      <div class="section-content" id="uddannelse-section">
+        <div class="big-section-box">
+          <div class="section-title">Uddannelse & Kurser</div>
+          <div class="profile-description">
+            Relevant uddannelse og kompetenceudvikling der styrker mine kvalifikationer som Marketing Projektleder.
+          </div>
+          <div class="centered-content">
+            <div class="experience-list">
+              <div class="experience-item" onclick="toggleExperience('education-kursus')" id="education-kursus-item">
+                <div class="experience-header">
+                  <div class="experience-title">Projektledelses Kursus</div>
+                  <div class="experience-company">Itucation (2025) • Formelle værktøjer</div>
+                </div>
+                <div id="education-kursus-details" class="experience-details">
+                  <div class="skills-grid">
+                    <div class="skill-tag">Projektledelse</div>
+                    <div class="skill-tag">Strukturering</div>
+                    <div class="skill-tag">Koordination</div>
+                  </div>
+                  <ul>
+                    <li>Gennemførte projektledelses kursus for at få formelle værktøjer til min naturlige koordinationsevne</li>
+                    <li>Kombination af praktisk erfaring og teoretisk viden</li>
+                    <li>Fik indsigt i bl.a. SCRUM og effektive planlægningsværktøjer</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="experience-item" onclick="toggleExperience('education-uni')" id="education-uni-item">
+                <div class="experience-header">
+                  <div class="experience-title">Designkultur og Økonomi</div>
+                  <div class="experience-company">Syddansk Universitet Kolding (August 2018 - Juli 2021)</div>
+                </div>
+                <div id="education-uni-details" class="experience-details">
+                  <div class="skills-grid">
+                    <div class="skill-tag">Design Thinking</div>
+                    <div class="skill-tag">Forretningsforståelse</div>
+                    <div class="skill-tag">Kulturanalyse</div>
+                    <div class="skill-tag">Visuel kommunikation</div>
+                  </div>
+                  <ul>
+                    <li>Kombination af kreative design processer og økonomisk forståelse</li>
+                    <li>Kulturelle trends og deres indvirkning på forbrugeradfærd</li>
+                    <li>Visuel kommunikation og brand udvikling</li>
+                    <li>Forretningsforståelse og markedsmekanismer</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Motivation -->
+      <div class="section-content" id="motivation-section">
+        <div class="big-section-box">
+          <div class="section-title">Motivation</div>
+          <div class="profile-description">
+            <p><strong>“At rejse er at leve”</strong> - Er det ikke sådan man siger? Det er i hvert fald sådan jeg er vokset op. Med en mor som stewardesse gennem 35+ år har rejser altid været en del af opvæksten, og det har været absolut magisk. Det giver bare et helt andet perspektiv på hverdagen at opleve et nyt land og en anden kultur. Det virker også til, at I hos Travelheart og DanExplore har det sådan.</p>
+            <p><strong>Kreativitet som passion og personlighed</strong><br>
+            Det at være kreativ har hele mit liv været en central del af hvem jeg er. Som barn ville jeg for eksempel ikke se en tegnefilm, hvis jeg synes den var grimt tegnet (smagsdommer i en tidlig alder - Ghibli film var et stort ja, Ed, Edd og Eddy var et stort nej).<br>
+            Jeg opvejer kvalitet frem for kvantitet og ser design liggende i krydsfeltet mellem problemløsning, historiefortælling og identitet. Derfor har jeg også af ren interesse lært mig selv at bruge værktøjer som InDesign, Photoshop og SketchUp, som der flittigt bliver brugt til diverse kreative projekter herhjemme.</p>
+            <p><strong>Ønsket om noget nyt</strong><br>
+            Jeg sætter stor pris på jeres ønske om at gøre noget nyt og “ikke bare det i plejer” - det er nemlig også der jeg selv er og hvordan jeg ønsker at arbejde.<br>
+            Efter ni år i modebranchen har jeg lært, hvor vigtigt det er at holde hovedet koldt, når kalenderen er pakket, og der pludselig opstår uventede udfordringer midt i hverdagen. Jeg har haft ansvar for at holde styr på både leverancer, kollegaers oplæring og det praktiske bag kulissen – og jeg trives bedst, når jeg får tingene til at glide, selv når tempoet er højt.</p>
+            <p>Men jeg har også mærket, at jeg gerne vil arbejde et sted, hvor jeg føler, at det, jeg laver, gør en forskel og hvor jeg kan udfolde min kreativitet endnu mere.</p>
+            <p>Jeg leder efter et sted hvor man løfter i flok, samarbejder og hvor der er plads til kreativitet og forandring - og jeg ved, at jeg ville kunne bidrage med noget godt allerede på første dagen i jeres team.</p> 
+            <p>Jeg er klar til en ny vej på min karriererejse og håber I vil hjælpe mig på vej!</p>
+            <p><strong>Tusinde tak fordi I læste med.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function setActiveSection(section) {
+      document.querySelectorAll('.menu a').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.section-content').forEach(sec => {
+        sec.classList.remove('active');
+        sec.style.opacity = 0;
+      });
+      if (section === "front") {
+        document.body.classList.remove("with-overlay");
+        document.getElementById('front-section').classList.add('active');
+        setTimeout(() => { document.getElementById('front-section').style.opacity = 1; }, 30);
+      } else {
+        document.body.classList.add("with-overlay");
+        let sec = document.getElementById(section + '-section');
+        if(sec) {
+          sec.classList.add('active');
+          setTimeout(() => { sec.style.opacity = 1; }, 30);
+        }
+      }
+    }
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        setActiveSection(this.dataset.section);
+        this.classList.add('active');
+      });
+    });
+    setActiveSection("front");
+    function closeAllExpDetails() {
+      document.querySelectorAll('.experience-details').forEach(function(details) {
+        details.classList.remove('active');
+        details.style.display = 'none';
+      });
+      document.querySelectorAll('.experience-item').forEach(function(item) {
+        item.classList.remove('active');
+      });
+    }
+    function toggleExperience(id) {
+      const details = document.getElementById(id + '-details');
+      const item = document.getElementById(id + '-item');
+      if (!details) return;
+      if (details.classList.contains('active')) {
+        details.classList.remove('active');
+        details.style.display = 'none';
+        if (item) item.classList.remove('active');
+      } else {
+        closeAllExpDetails();
+        details.classList.add('active');
+        details.style.display = 'block';
+        if (item) item.classList.add('active');
+      }
+    }
+    window.toggleExperience = toggleExperience;
+    var skills = [
+      {
+        name: "Storytelling & Kreativ Tekstforfatning",
+        level: 3,
+        description: "Hvem elsker ikke en god historie! Eller sjove og skæve sætninger der får tankerne igang.",
+        needsDescription: "Tekster og kampagner, der inspirerer folk til at drømme, opleve og engagere sig.",
+        contribution: "Kreativ idéudvikling, storytelling og erfaring med at skrive til mange forskellige platforme. Jeg formidler indhold, som både informerer og skaber følelser."
+      },
+      {
+        name: "Visuel Kommunikation",
+        level: 4,
+        description: "Visuel kommunikation er min måde at fortælle historier på, når ord ikke er nok. Jeg elsker at arbejde med billeder og grafik, så budskabet bliver levende og får personlighed – og jeg elsker at forfine de små detaljer, der gør forskellen.",
+        needsDescription: "Et iøjnefaldende visuelt univers, der får folk til at stoppe op og mærke rejselysten.",
+        contribution: "Kreativ billedredigering, grafiske løsninger og videoer, der understøtter brandet og gør indholdet mindeværdigt."
+      },
+      {
+        name: "Eksperimenterende Idéudvikling",
+        level: 4,
+        description: "Jeg trives allerbedst, når jeg kan tænke ud af boksen og afprøve nye idéer. Jeg bliver motiveret af at eksperimentere og se, hvor kreative koncepter kan føre hen – og jeg har altid øje for, hvordan data og trends kan omsættes til innovation.",
+        needsDescription: "Friske kampagner og indhold, der tør skille sig ud og invitere til nye oplevelser.",
+        contribution: "Energi og nysgerrighed i idéudvikling, erfaring med både analyse og kreativ konceptudvikling, samt evnen til at omsætte indsigter til konkrete løsninger."
+      },
+      {
+        name: "Struktur & Selvstændighed",
+        level: 5,
+        description: "Jeg sætter pris på struktur og elsker at have styr på processer og deadlines. Med overblik og selvstændighed kan jeg få selv komplekse projekter til at glide – og jeg har det bedst, når jeg får lov til at tage ansvar og se ting lykkes.",
+        needsDescription: "En sikker hånd på projektstyring og en person, der holder overblikket – også når der sker meget på én gang.",
+        contribution: "Stærk planlægning, selvstændig opgaveløsning og evnen til at skabe ro og retning, så projekterne kommer i mål."
+      },
+      {
+        name: "SoMe & Engagement",
+        level: 3,
+        description: "Jeg har et naturligt blik for, hvad der rører sig på sociale medier, og jeg elsker at være med til at skabe dialog og engagement.",
+        needsDescription: "Indhold, der får folk til at deltage, kommentere og dele – og SOME-strategier, der bygger fællesskab.",
+        contribution: "Erfaring med SOME-planlægning, community management og indhold, der skaber ægte engagement og nærvær."
+      },
+      {
+        name: "Performance Tracking",
+        level: 4,
+        description: "Jeg er nysgerrig på, hvad der virker – og hvorfor. Jeg bruger data og feedback til at justere og forbedre indhold, og synes det er spændende at se resultaterne af indsatsen sort på hvidt.",
+        needsDescription: "En analytisk tilgang, der sikrer at indsatser og indhold løbende bliver bedre og mere relevante.",
+        contribution: "Løbende måling og analyse, evnen til at finde mønstre i data og lysten til at omsætte indsigter til nye idéer og forbedringer."
+      }
+    ];
+    function wrapRadarText(text, maxWidth, fontSize) {
+      const words = text.split(" ");
+      let line = "";
+      let lines = [];
+      for (let i = 0; i < words.length; i++) {
+        let testLine = line + (line ? " " : "") + words[i];
+        let testWidth = testLine.length * fontSize * 0.6;
+        if (testWidth > maxWidth && line) {
+          lines.push(line);
+          line = words[i];
+        } else {
+          line = testLine;
+        }
+      }
+      lines.push(line);
+      return lines;
+    }
+    function drawRadarChart() {
+      var svg = document.getElementById('skillChart');
+      if (!svg) return;
+      svg.setAttribute('viewBox', '0 0 400 400');
+      svg.innerHTML = '';
+      var center = { x: 200, y: 200 };
+      var maxRadius = 140;
+      var levels = 5;
+      var angleStep = (2 * Math.PI) / skills.length;
+      for (var i = 1; i <= levels; i++) {
+        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', center.x);
+        circle.setAttribute('cy', center.y);
+        circle.setAttribute('r', (maxRadius / levels) * i);
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', '#b7c7b0');
+        circle.setAttribute('stroke-width', '1');
+        svg.appendChild(circle);
+      }
+      for (var i = 0; i < skills.length; i++) {
+        var angle = (i * angleStep) - (Math.PI / 2);
+        var x = center.x + Math.cos(angle) * maxRadius;
+        var y = center.y + Math.sin(angle) * maxRadius;
+        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', center.x);
+        line.setAttribute('y1', center.y);
+        line.setAttribute('x2', x);
+        line.setAttribute('y2', y);
+        line.setAttribute('stroke', '#b7c7b0');
+        line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+      }
+      var points = [];
+      for (var i = 0; i < skills.length; i++) {
+        var angle = (i * angleStep) - (Math.PI / 2);
+        var radius = (skills[i].level / levels) * maxRadius;
+        var x = center.x + Math.cos(angle) * radius;
+        var y = center.y + Math.sin(angle) * radius;
+        points.push(x + ',' + y);
+      }
+      var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      polygon.setAttribute('points', points.join(' '));
+      polygon.setAttribute('fill', 'rgba(41,66,49,0.10)');
+      polygon.setAttribute('stroke', '#294231');
+      polygon.setAttribute('stroke-width', '2');
+      svg.appendChild(polygon);
+      for (var i = 0; i < skills.length; i++) {
+        var skill = skills[i];
+        var angle = (i * angleStep) - (Math.PI / 2);
+        var radius = (skill.level / levels) * maxRadius;
+        var x = center.x + Math.cos(angle) * radius;
+        var y = center.y + Math.sin(angle) * radius;
+        var point = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        point.setAttribute('cx', x);
+        point.setAttribute('cy', y);
+        point.setAttribute('r', skill.level >= 4 ? '10' : '8');
+        point.setAttribute('fill', skill.level >= 4 ? '#294231' : '#7e9c85');
+        point.setAttribute('stroke', 'white');
+        point.setAttribute('stroke-width', '2');
+        point.style.cursor = "pointer";
+        point.skillData = skill;
+        point.onmouseenter = function() { showSkillDetails(this.skillData); };
+        point.onmouseleave = function() { document.querySelector('.skill-details').innerHTML = document.querySelector('.default-message').outerHTML; };
+        point.onclick = function() { showSkillDetails(this.skillData); };
+        svg.appendChild(point);
+
+        var fontSize = 17;
+        var maxWidth = 125;
+        var labelRadius = maxRadius + 27;
+        var labelX = center.x + Math.cos(angle) * labelRadius;
+        var labelY = center.y + Math.sin(angle) * labelRadius;
+        var lines = wrapRadarText(skill.name, maxWidth, fontSize);
+        for (var li=0; li<lines.length; li++) {
+          var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.setAttribute('x', labelX);
+          text.setAttribute('y', labelY + (li-(lines.length-1)/2)*18);
+          text.setAttribute('text-anchor', labelX > center.x ? 'start' : (labelX < center.x ? 'end' : 'middle'));
+          text.setAttribute('dominant-baseline', 'middle');
+          text.setAttribute('font-size', fontSize);
+          text.setAttribute('fill', '#294231');
+          text.textContent = lines[li];
+          text.style.cursor = "pointer";
+          text.skillData = skill;
+          text.onmouseenter = function() { showSkillDetails(this.skillData); };
+          text.onmouseleave = function() { document.querySelector('.skill-details').innerHTML = document.querySelector('.default-message').outerHTML; };
+          text.onclick = function() { showSkillDetails(this.skillData); };
+          svg.appendChild(text);
+        }
+      }
+    }
+    function showSkillDetails(skill) {
+      var skillDetails = document.querySelector('.skill-details');
+      if (skillDetails) {
+        skillDetails.innerHTML =
+          '<div class="mapping-detail-card">' +
+           '<div class="mapping-detail-title">' + skill.name +
+            ' <span class="mapping-detail-prolevel">(' + skill.level + '/5)</span></div>' +
+            '<div class="mapping-detail-desc">' + skill.description + '</div>' +
+            '<div class="competency-section"><h4>DanExplore har brug for:</h4><p>' + skill.needsDescription + '</p></div>' +
+            '<div class="competency-section"><h4>Jeg kan bidrage med:</h4><p>' + skill.contribution + '</p></div>' +
+          '</div>';
+      }
+    }
+    if (document.getElementById('skillChart')) drawRadarChart();
+  </script>
+</body>
+</html>
