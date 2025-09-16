@@ -963,50 +963,43 @@
       }
     }
     window.toggleExperience = toggleExperience;
-    var skills = [
-      {
-        name: "Projektledelse & Koordination",
-        level: 4,
-        description: "Jeg har solid erfaring med at planlægge, koordinere og følge op på projekter fra start til slut. Jeg arbejder struktureret og sørger for, at alle ved, hvad de skal, og hvornår.",
-        needsDescription: "Overblik over processer og deadlines, sikring af fremdrift samt god koordinering mellem teams.",
-        contribution: "Jeg følger løbende op på status og sikrer, at vi holder kursen og afslutter projekter til aftalt tid."
-      },
-      {
-        name: "Tværfagligt Samarbejde",
-        level: 5,
-        description: "Jeg samarbejder naturligt med både teknik, salg, distributører og kunder – også på tværs af lande. Jeg gør en dyd ud af at gøre tekniske emner forståelige for alle.",
-        needsDescription: "Samarbejde på tværs af fagligheder og lande, hvor gode relationer og tydelig kommunikation er vigtig.",
-        contribution: "Jeg bidrager til, at alle forstår hinanden og får det nødvendige grundlag for at arbejde effektivt sammen."
-      },
-      {
-        name: "Markedsanalyse & Data",
-        level: 4,
-        description: "Jeg er vant til at arbejde med data og bruger analyser til at forstå markedet og optimere vores arbejdsprocesser. Excel og rapportering er en naturlig del af mit arbejde.",
-        needsDescription: "Løbende analyse og opfølgning på leverancer, ordrer og processer for at skabe overblik og forbedre resultater.",
-        contribution: "Jeg oversætter data til konkrete handlinger og anbefalinger, så vi kan optimere og træffe gode beslutninger."
-      },
-      {
-        name: "Visuel kommunikation",
-        level: 4,
-        description: "Jeg kan formidle tekniske løsninger og komplekse informationer med grafik og tekst, så det er let at forstå for både kolleger og kunder.",
-        needsDescription: "Udarbejdelse af visuelt materiale, som præsenterer tekniske løsninger på en indbydende og overskuelig måde.",
-        contribution: "Jeg producerer materialer, der gør det nemt at forstå forslag og løsninger – også for dem uden teknisk baggrund."
-      },
-      {
-        name: "Ordrehåndtering",
-        level: 4,
-        description: "Jeg har erfaring med at tage imod og følge op på ordrer, holde styr på leveringsstatus og kommunikere ændringer, hvis de opstår.",
-        needsDescription: "Modtage og håndtere ordrer, følge leveringer og informere om ændringer eller forsinkelser, hvis nødvendigt.",
-        contribution: "Jeg holder styr på detaljerne og sørger for, at både kolleger og kunder altid er opdaterede på status."
-      },
-      {
-        name: "Performance Tracking",
-        level: 4,
-        description: "Jeg har konkret erfaring med at følge op på KPI’er og salgsdata, så vi kan se, hvordan det går og hvor vi kan forbedre os.",
-        needsDescription: "Opfølgning på processer, leverancer og nøgletal for at sikre, at vi når vores mål og leverer kvalitet.",
-        contribution: "Jeg analyserer og rapporterer løbende, så vi kan justere og forbedre, når det er nødvendigt."
-      }
-    ];
+  var skills = [
+  {
+    name: "Projektledelse & Koordination",
+    level: 4,
+    description: "Jeg trives med at have det store overblik og holder alle tråde samlet. Mine kolleger ved, at når jeg er på et projekt, så kommer vi i mål til tiden.",
+    needsDescription: "Struktur og fremdrift i komplekse projekter med mange involverede parter.",
+    contribution: "Min systematiske tilgang sikrer, at intet falder mellem stolene, og alle ved præcis hvor vi står."
+  },
+  {
+    name: "Tværfagligt Samarbejde",
+    level: 5,
+    description: "Dethar altid været en stor del af min hverdag at bygge bro mellem teknikere, sælgere og kunder - også på tværs af landegrænser. Jeg kan oversætte teknisk snak til almindeligt dansk.",
+    needsDescription: "Smidig kommunikation mellem forskellige fagområder og kulturer.",
+    contribution: "Jeg sørger for, at alle kommer med på vognen - uanset om de taler kode eller regnskab."
+  },
+  {
+    name: "Visuel Kommunikation",
+    level: 4,
+    description: "Komplekse tekniske løsninger bliver meget nemmere at forstå, når man kan se dem. Jeg elsker at lave grafik og tekster, der får selv de mest indviklede ting til at give mening.",
+    needsDescription: "Formidling af tekniske koncepter gennem visuelt tilgængeligt materiale.",
+    contribution: "Mit visuelle materiale gør komplekse emner tilgængelige, så møder bliver mere produktive og beslutninger lettere at træffe."
+  },
+  {
+    name: "Ordrehåndtering",
+    level: 4,
+    description: "Jeg har direkte erfaring med ordrehåndtering, både med indtastning, levering og opfølgning. Transparens er her også vigtig for mig - folk skal vide, hvad der sker.",
+    needsDescription: "Smidig håndtering af ordreprocesser med fokus på åben kommunikation.",
+    contribution: "Mine kunder oplever færre overraskelser og mere forudsigelighed i leveringsforløbet."
+  },
+  {
+    name: "Performance Tracking",
+    level: 4,
+    description: "Jeg kan lide at følge op på, hvordan vi klarer os. Når jeg tracker KPI'er og salgstal, handler det ikke bare om rapporter - det handler om at finde ud af, hvor vi kan blive endnu bedre.",
+    needsDescription: "Systematisk opfølgning på resultater og identificering af forbedringsmuligheder.",
+    contribution: "Mine analyser bliver til handlingsplaner - ikke bare tal på en skærm."
+  }
+];
     function wrapRadarText(text, maxWidth, fontSize) {
       const words = text.split(" ");
       let line = "";
@@ -1130,6 +1123,7 @@
   </script>
 </body>
 </html>
+
 
 
 
