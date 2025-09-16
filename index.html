@@ -19,7 +19,6 @@
       --font-title: 'Playfair Display', serif;
       --text-dark: #181818;
     }
-    /* --- Video background and overlay styles --- */
     .bg-video-container {
       position: fixed;
       top: 0; left: 0;
@@ -649,8 +648,7 @@
       loop
       muted
       playsinline
-    >
-    </video>
+    ></video>
     <div class="bg-overlay"></div>
   </div>
   <div class="split-layout">
@@ -668,6 +666,7 @@
       </nav>
     </div>
     <div class="content-area">
+      <img src="profile.jpg" alt="Artwork" class="front-image" id="frontimg" />
       <!-- Om Mig -->
       <div class="section-content" id="ommig-section">
         <div class="om-mig-box">
@@ -720,7 +719,6 @@
           </div>
         </div>
       </div>
-
       <!-- Kompetencer -->
       <div class="section-content" id="Værktøjskassen-section">
         <div class="mapping-box">
@@ -762,7 +760,6 @@
           </div>
         </div>
       </div>
-
       <!-- Erfaring -->
      <div class="section-content" id="erfaring-section">
   <div class="big-section-box">
@@ -933,10 +930,11 @@
         sec.classList.remove('active');
         sec.style.opacity = 0;
       });
+      const frontImg = document.getElementById('frontimg');
       if(section === "front") {
-        document.getElementById('frontimg').style.display = "block";
+        if (frontImg) frontImg.style.display = "block";
       } else {
-        document.getElementById('frontimg').style.display = "none";
+        if (frontImg) frontImg.style.display = "none";
         let secElem = document.getElementById(section + '-section');
         if(secElem) {
           secElem.classList.add('active');
@@ -981,50 +979,50 @@
     }
     window.toggleExperience = toggleExperience;
     // Radar chart JS
-var skills = [
-  {
-    name: "Projektledelse & Koordination",
-    level: 4,
-    description: "Jeg har solid erfaring med at planlægge, koordinere og følge op på projekter fra start til slut. Jeg arbejder struktureret og sørger for, at alle ved, hvad de skal, og hvornår.",
-    needsDescription: "Overblik over processer og deadlines, sikring af fremdrift samt god koordinering mellem teams.",
-    contribution: "Jeg følger løbende op på status og sikrer, at vi holder kursen og afslutter projekter til aftalt tid."
-  },
-  {
-    name: "Tværfagligt Samarbejde",
-    level: 5,
-    description: "Jeg samarbejder naturligt med både teknik, salg, distributører og kunder – også på tværs af lande. Jeg gør en dyd ud af at gøre tekniske emner forståelige for alle.",
-    needsDescription: "Samarbejde på tværs af fagligheder og lande, hvor gode relationer og tydelig kommunikation er vigtig.",
-    contribution: "Jeg bidrager til, at alle forstår hinanden og får det nødvendige grundlag for at arbejde effektivt sammen."
-  },
-  {
-    name: "Markedsanalyse & Data",
-    level: 4,
-    description: "Jeg er vant til at arbejde med data og bruger analyser til at forstå markedet og optimere vores arbejdsprocesser. Excel og rapportering er en naturlig del af mit arbejde.",
-    needsDescription: "Løbende analyse og opfølgning på leverancer, ordrer og processer for at skabe overblik og forbedre resultater.",
-    contribution: "Jeg oversætter data til konkrete handlinger og anbefalinger, så vi kan optimere og træffe gode beslutninger."
-  },
-  {
-    name: "Visuel kommunikation",
-    level: 4,
-    description: "Jeg kan formidle tekniske løsninger og komplekse informationer med grafik og tekst, så det er let at forstå for både kolleger og kunder.",
-    needsDescription: "Udarbejdelse af visuelt materiale, som præsenterer tekniske løsninger på en indbydende og overskuelig måde.",
-    contribution: "Jeg producerer materialer, der gør det nemt at forstå forslag og løsninger – også for dem uden teknisk baggrund."
-  },
-  {
-    name: "Ordrehåndtering",
-    level: 4,
-    description: "Jeg har erfaring med at tage imod og følge op på ordrer, holde styr på leveringsstatus og kommunikere ændringer, hvis de opstår.",
-    needsDescription: "Modtage og håndtere ordrer, følge leveringer og informere om ændringer eller forsinkelser, hvis nødvendigt.",
-    contribution: "Jeg holder styr på detaljerne og sørger for, at både kolleger og kunder altid er opdaterede på status."
-  },
-  {
-    name: "Performance Tracking",
-    level: 4,
-    description: "Jeg har konkret erfaring med at følge op på KPI’er og salgsdata, så vi kan se, hvordan det går og hvor vi kan forbedre os.",
-    needsDescription: "Opfølgning på processer, leverancer og nøgletal for at sikre, at vi når vores mål og leverer kvalitet.",
-    contribution: "Jeg analyserer og rapporterer løbende, så vi kan justere og forbedre, når det er nødvendigt."
-  }
-];
+    var skills = [
+      {
+        name: "Projektledelse & Koordination",
+        level: 4,
+        description: "Jeg har solid erfaring med at planlægge, koordinere og følge op på projekter fra start til slut. Jeg arbejder struktureret og sørger for, at alle ved, hvad de skal, og hvornår.",
+        needsDescription: "Overblik over processer og deadlines, sikring af fremdrift samt god koordinering mellem teams.",
+        contribution: "Jeg følger løbende op på status og sikrer, at vi holder kursen og afslutter projekter til aftalt tid."
+      },
+      {
+        name: "Tværfagligt Samarbejde",
+        level: 5,
+        description: "Jeg samarbejder naturligt med både teknik, salg, distributører og kunder – også på tværs af lande. Jeg gør en dyd ud af at gøre tekniske emner forståelige for alle.",
+        needsDescription: "Samarbejde på tværs af fagligheder og lande, hvor gode relationer og tydelig kommunikation er vigtig.",
+        contribution: "Jeg bidrager til, at alle forstår hinanden og får det nødvendige grundlag for at arbejde effektivt sammen."
+      },
+      {
+        name: "Markedsanalyse & Data",
+        level: 4,
+        description: "Jeg er vant til at arbejde med data og bruger analyser til at forstå markedet og optimere vores arbejdsprocesser. Excel og rapportering er en naturlig del af mit arbejde.",
+        needsDescription: "Løbende analyse og opfølgning på leverancer, ordrer og processer for at skabe overblik og forbedre resultater.",
+        contribution: "Jeg oversætter data til konkrete handlinger og anbefalinger, så vi kan optimere og træffe gode beslutninger."
+      },
+      {
+        name: "Visuel kommunikation",
+        level: 4,
+        description: "Jeg kan formidle tekniske løsninger og komplekse informationer med grafik og tekst, så det er let at forstå for både kolleger og kunder.",
+        needsDescription: "Udarbejdelse af visuelt materiale, som præsenterer tekniske løsninger på en indbydende og overskuelig måde.",
+        contribution: "Jeg producerer materialer, der gør det nemt at forstå forslag og løsninger – også for dem uden teknisk baggrund."
+      },
+      {
+        name: "Ordrehåndtering",
+        level: 4,
+        description: "Jeg har erfaring med at tage imod og følge op på ordrer, holde styr på leveringsstatus og kommunikere ændringer, hvis de opstår.",
+        needsDescription: "Modtage og håndtere ordrer, følge leveringer og informere om ændringer eller forsinkelser, hvis nødvendigt.",
+        contribution: "Jeg holder styr på detaljerne og sørger for, at både kolleger og kunder altid er opdaterede på status."
+      },
+      {
+        name: "Performance Tracking",
+        level: 4,
+        description: "Jeg har konkret erfaring med at følge op på KPI’er og salgsdata, så vi kan se, hvordan det går og hvor vi kan forbedre os.",
+        needsDescription: "Opfølgning på processer, leverancer og nøgletal for at sikre, at vi når vores mål og leverer kvalitet.",
+        contribution: "Jeg analyserer og rapporterer løbende, så vi kan justere og forbedre, når det er nødvendigt."
+      }
+    ];
     function wrapRadarText(text, maxWidth, fontSize) {
       const words = text.split(" ");
       let line = "";
@@ -1113,10 +1111,10 @@ var skills = [
         var labelX = center.x + Math.cos(angle) * labelRadius;
         var labelY = center.y + Math.sin(angle) * labelRadius;
         var lines = wrapRadarText(skill.name, maxWidth, fontSize);
-        for (var li=0; li<lines.length; li++) {
+        for (var li = 0; li < lines.length; li++) {
           var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
           text.setAttribute('x', labelX);
-          text.setAttribute('y', labelY + (li-(lines.length-1)/2)*18);
+          text.setAttribute('y', labelY + (li - (lines.length - 1) / 2) * 18);
           text.setAttribute('text-anchor', labelX > center.x ? 'start' : (labelX < center.x ? 'end' : 'middle'));
           text.setAttribute('dominant-baseline', 'middle');
           text.setAttribute('font-size', fontSize);
@@ -1148,13 +1146,3 @@ var skills = [
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
