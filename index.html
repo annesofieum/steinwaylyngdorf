@@ -29,7 +29,6 @@
       font-weight: 400;
       min-height: 100vh;
       box-sizing: border-box;
-      /* Airplane cursor - black */
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"><g><polygon points="18,2 34,18 18,14 2,18" fill="black"/><rect x="16" y="14" width="4" height="18" fill="black"/><polygon points="18,24 28,32 18,30 8,32" fill="black"/></g></svg>') 18 18, auto;
       overscroll-behavior: none;
     }
@@ -392,7 +391,6 @@
       justify-content: flex-start;
       margin-top: 2.3em;
     }
-    /* NEW LEGEND STYLES */
     .mapping-legendbox {
       background: #fff;
       border-radius: 14px;
@@ -601,146 +599,6 @@
     .skills-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 9px;}
     .skill-tag { background: var(--accent-green); color: #fff; border-radius: 9px; padding: 3px 8px; font-size: 0.98rem;}
     .motivation-text { padding: 2.1rem 2rem 2.1rem 1.6rem; font-size: 1.13rem; text-align: center; }
-    /* MOBILE STYLES */
-    @media (max-width: 1100px) {
-      .section-content,.big-section-box,.om-mig-box,.mapping-box { max-width: 99vw; padding: 2vw 2vw;}
-      .sidebar { width: 100vw; min-width: 0; padding: 0 0 0 12px; box-shadow: 0 2px 8px #dbeada1a;}
-      .split-layout { flex-direction: column; }
-      .content-area { min-height: 45vh; }
-      .front-image { max-width: 98vw; min-height: 60vh; }
-      .mapping-flex { flex-direction: column; }
-      .mapping-left,.mapping-right { max-width: 100vw; min-width: unset; padding:0; }
-      #skillChart { width: 100vw !important; min-width: 180px; height: 220px !important;}
-      .big-section-box { min-width: 0; }
-      .sidebar-header { height: auto; min-height: 90px; }
-      .name-title { font-size: 2.1rem; }
-    }
-    @media (max-width: 700px) {
-      .sidebar {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100vw;
-        min-width: 0;
-        height: auto;
-        position: static;
-        padding: 0 0 0 5vw;
-        box-shadow: none;
-      }
-      .sidebar-header {
-        margin-top: 10px;
-        margin-bottom: 0;
-        height: auto;
-        min-height: 0;
-        padding: 0;
-        width: 100%;
-      }
-      .name-title {
-        font-size: 1.3rem;
-        text-align: left;
-        margin-bottom: 9px;
-        width: 100%;
-        line-height: 1.1;
-      }
-      .menu {
-        flex-direction: column;
-        gap: 0;
-        margin-left: 0;
-        margin-bottom: 0.5rem;
-        width: 100%;
-        background: none;
-        box-shadow: none;
-        padding: 0;
-      }
-      .menu a {
-        font-size: 1.1rem;
-        padding: 0.5em 0.5em;
-        display: block;
-        width: 100%;
-        text-align: left;
-        border-radius: 0;
-        border-bottom: 1px solid #eee;
-        margin: 0;
-        background: none;
-        box-shadow: none;
-        opacity: 1;
-        transform: none;
-      }
-      .menu a.active, .menu a:hover {
-        background: var(--soft-green);
-        color: var(--accent-green);
-        opacity: 1;
-        border-radius: 0;
-        transform: none;
-        box-shadow: none;
-      }
-      .content-area {
-        margin-left: 0;
-        margin-top: 0;
-      }
-      .big-section-box,
-      .om-mig-box,
-      .mapping-box {
-        padding: 4vw 2vw;
-        min-width: 0;
-        width: 98vw;
-        box-sizing: border-box;
-        max-width: 100vw;
-      }
-      .section-content,
-      .big-section-box,
-      .om-mig-box,
-      .mapping-box {
-        min-width: 0;
-        max-width: 100vw;
-      }
-      .stats-row,
-      .contact-lang-row {
-        flex-direction: column;
-        gap: 18px;
-      }
-      .stat-card,
-      .contact-col,
-      .lang-col {
-        min-width: 0;
-        max-width: 100vw;
-      }
-      .mapping-flex {
-        flex-direction: column;
-        gap: 15px;
-        min-height: 0;
-      }
-      #skillChart {
-        width: 95vw !important;
-        min-width: 0 !important;
-        height: 220px !important;
-      }
-      .om-mig-title,
-      .mapping-headline,
-      .radar-title,
-      .section-title {
-        font-size: 1.2rem !important;
-      }
-      .om-mig-desc,
-      .mapping-desc,
-      .profile-description {
-        font-size: 1rem !important;
-      }
-      .experience-title,
-      .experience-company {
-        font-size: 1rem !important;
-      }
-      .front-image {
-        min-height: 30vh;
-        height: auto;
-        max-width: 100vw;
-        object-fit: cover;
-      }
-      .mapping-legendbox {
-        min-width: 0;
-        max-width: 100vw;
-        padding: 1.1em 1.2em 1em 1.2em;
-      }
-    }
   </style>
 </head>
 <body>
@@ -761,6 +619,7 @@
     <div class="content-area">
       <!-- Forside -->
       <img src="profile.jpg" alt="Artwork" class="front-image" id="frontimg" />
+
       <!-- Om Mig -->
       <div class="section-content" id="ommig-section">
         <div class="om-mig-box">
@@ -813,6 +672,7 @@
           </div>
         </div>
       </div>
+
       <!-- Kompetencer -->
       <div class="section-content" id="Værktøjskassen-section">
         <div class="mapping-box">
@@ -825,7 +685,6 @@
               <div class="radar-title">Kompetence Radar</div>
               <svg id="skillChart"></svg>
               <div class="radar-legend-wrap">
-                <!-- NEW LEGEND LAYOUT -->
                 <div class="mapping-legendbox">
                   <div class="legend">
                     <span class="legend-color legend-dark"></span>
@@ -855,6 +714,7 @@
           </div>
         </div>
       </div>
+
       <!-- Erfaring -->
       <div class="section-content" id="erfaring-section">
         <div class="big-section-box">
@@ -891,6 +751,8 @@
                 </div>
               </div>
               <div class="experience-item" onclick="toggleExperience('sofie')" id="sofie-item">
+                <div class="
+                                <div class="experience-item" onclick="toggleExperience('sofie')" id="sofie-item">
                 <div class="experience-header">
                   <div class="experience-title">Kreativ Medarbejder</div>
                   <div class="experience-company">Sofie Ladefoged (Januar 2022 – Marts 2022) • Medium relevans</div>
@@ -933,7 +795,7 @@
                   <ul>
                     <li>Indsamlede markedsindsigter gennem dataanalyse og kundefeedback til sortimentsoptimering</li>
                     <li>Koordinerede udviklingsprojekter mellem indkøb, marketing og supply chain teams</li>
-                     <li>Bookede ordre og koordinerede med logistik</li>
+                    <li>Bookede ordre og koordinerede med logistik</li>
                   </ul>
                   <p><strong>Case:</strong> Under julesalget lærte jeg, hvor afgørende det er at reagere hurtigt på data. Jeg fulgte løbende med i salgsudviklingen for de forskellige kategorier og tog initiativ til at justere sortiment og markedsføring på baggrund af de nyeste tal. For eksempel opdagede jeg en markant stigning i efterspørgslen på særlige gaveartikler og foreslog, at vi skubbede ekstra på i markedsføringen – hvilket førte til øget salg i perioden.</p>
                 </div>
@@ -942,7 +804,7 @@
           </div>
         </div>
       </div>
-            <!-- Uddannelse -->
+      <!-- Uddannelse -->
       <div class="section-content" id="uddannelse-section">
         <div class="big-section-box">
           <div class="section-title">Uddannelse & Kurser</div>
@@ -993,50 +855,57 @@
           </div>
         </div>
       </div>
- <!-- Motivation -->
-<div class="section-content" id="motivation-section">
-  <div class="big-section-box">
-    <div class="section-title">Motivation</div>
-    <div class="profile-description" style="text-align:left;max-width:700px;margin:0 auto;">
-      <strong>Omhyggelighed, et glimt i øjet og mod på teknik</strong><br>
-      Jeg har altid haft et godt ry for at holde styr på detaljerne, og det er faktisk noget, jeg har været stolt af. Derfor burde jeg måske lade være med at nævne, at jeg lykkedes med at sende jer linket til den forkerte hjemmeside i første omgang. Det er selvfølgelig lidt pinligt, men hvis ikke andet, så kan jeg i det mindste garantere, at jeg tager mine egne fejl med et glimt i øjet, og at jeg til gengæld går ekstra meget op i, at det hele spiller, når det virkelig gælder.
-      <br><br>
-      Der er noget tilfredsstillende ved at få alle brikkerne til at falde på plads, især når det kræver, at man både kan sætte sig ind i tekniske detaljer, holde styr på mange tråde og samtidig kommunikere klart og visuelt. Jeg kan godt lide at hjælpe kolleger og kunder med at finde frem til den rigtige løsning. Jeg slipper ikke en opgave, før alle spørgsmål er afklaret og vi er helt i mål, også selvom det kræver et ekstra opkald eller et par runder på tilbudsmaterialet.
-      <br><br>
-      Teknik og systemer skræmmer mig ikke. Faktisk synes jeg, det er spændende at forstå, hvordan produkterne fungerer, og jeg tager det som en udfordring at gøre selv komplekse løsninger tilgængelige, både på skærmen og på papiret. Jeg synes, det er sjovt at nørde med visuel formidling, og jeg kan godt lide at se, hvordan et godt tilbud eller en overskuelig faktura kan gøre hele processen nemmere for alle parter.
-      <br><br>
-      Min erfaring har lært mig, at det ikke altid er planen, der holder, men at det er opfølgningen, dialogen og evnen til at tage ansvar, der får projekterne til at lykkes. Jeg trives bedst i et miljø, hvor man arbejder tæt sammen, kan lave fejl (og grine af dem), og hvor der er plads til både spørgsmål og skæve idéer.
-      <br><br>
-      Derfor kan jeg se mig selv hos jer. Jeg oprigtigt sætter pris på en hverdag, hvor kvalitet og samarbejde er i fokus, og hvor man hjælper hinanden med at få tingene til at lykkes. Og jeg lover, at næste gang jeg sender et link, dobbelttjekker jeg det først.
-      <br><br>
-      Tusinde tak fordi I læste med.
+      <!-- Motivation -->
+      <div class="section-content" id="motivation-section">
+        <div class="big-section-box">
+          <div class="section-title">Motivation</div>
+          <div class="profile-description" style="text-align:left;max-width:700px;margin:0 auto;">
+            <strong>Omhyggelighed, et glimt i øjet og mod på teknik</strong><br>
+            Jeg har altid haft et godt ry for at holde styr på detaljerne, og det er faktisk noget, jeg har været stolt af. Derfor burde jeg måske lade være med at nævne, at jeg lykkedes med at sende jer linket til den forkerte hjemmeside i første omgang. Det er selvfølgelig lidt pinligt, men hvis ikke andet, så kan jeg i det mindste garantere, at jeg tager mine egne fejl med et glimt i øjet, og at jeg til gengæld går ekstra meget op i, at det hele spiller, når det virkelig gælder.
+            <br><br>
+            Der er noget tilfredsstillende ved at få alle brikkerne til at falde på plads, især når det kræver, at man både kan sætte sig ind i tekniske detaljer, holde styr på mange tråde og samtidig kommunikere klart og visuelt. Jeg kan godt lide at hjælpe kolleger og kunder med at finde frem til den rigtige løsning. Jeg slipper ikke en opgave, før alle spørgsmål er afklaret og vi er helt i mål, også selvom det kræver et ekstra opkald eller et par runder på tilbudsmaterialet.
+            <br><br>
+            Teknik og systemer skræmmer mig ikke. Faktisk synes jeg, det er spændende at forstå, hvordan produkterne fungerer, og jeg tager det som en udfordring at gøre selv komplekse løsninger tilgængelige, både på skærmen og på papiret. Jeg synes, det er sjovt at nørde med visuel formidling, og jeg kan godt lide at se, hvordan et godt tilbud eller en overskuelig faktura kan gøre hele processen nemmere for alle parter.
+            <br><br>
+            Min erfaring har lært mig, at det ikke altid er planen, der holder, men at det er opfølgningen, dialogen og evnen til at tage ansvar, der får projekterne til at lykkes. Jeg trives bedst i et miljø, hvor man arbejder tæt sammen, kan lave fejl (og grine af dem), og hvor der er plads til både spørgsmål og skæve idéer.
+            <br><br>
+            Derfor kan jeg se mig selv hos jer. Jeg oprigtigt sætter pris på en hverdag, hvor kvalitet og samarbejde er i fokus, og hvor man hjælper hinanden med at få tingene til at lykkes. Og jeg lover, at næste gang jeg sender et link, dobbelttjekker jeg det først.
+            <br><br>
+            Tusinde tak fordi I læste med.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
   <script>
+    // Section navigation logic
+    function showSection(section) {
+      document.querySelectorAll('.section-content').forEach(sec => {
+        sec.classList.remove('active');
+        sec.style.opacity = 0;
+      });
+      if(section === "front") {
+        document.getElementById('frontimg').style.display = "block";
+      } else {
+        document.getElementById('frontimg').style.display = "none";
+        let secElem = document.getElementById(section + '-section');
+        if(secElem) {
+          secElem.classList.add('active');
+          setTimeout(() => { secElem.style.opacity = 1; }, 30);
+        }
+      }
+    }
     document.querySelectorAll('.menu a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
         document.querySelectorAll('.menu a').forEach(l => l.classList.remove('active'));
         this.classList.add('active');
-        document.querySelectorAll('.section-content').forEach(sec => {
-          sec.classList.remove('active');
-          sec.style.opacity = 0;
-        });
-        if (this.dataset.section === "front") {
-          document.getElementById('frontimg').style.display = "block";
-        } else {
-          document.getElementById('frontimg').style.display = "none";
-          let sec = document.getElementById(this.dataset.section + '-section');
-          if(sec) {
-            sec.classList.add('active');
-            setTimeout(() => { sec.style.opacity = 1; }, 30);
-          }
-        }
+        showSection(this.dataset.section);
       });
     });
-    document.getElementById('frontimg').style.display = "block";
-    document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+    // Initial state
+    showSection("front");
+    // Experience expander logic
     function closeAllExpDetails() {
       document.querySelectorAll('.experience-details').forEach(function(details) {
         details.classList.remove('active');
@@ -1062,7 +931,7 @@
       }
     }
     window.toggleExperience = toggleExperience;
-
+    // Radar chart JS
     var skills = [
       { name: "Projektledelse & Koordination", level: 4, description: "Jeg er som skrevet en god blanding af struktur og kreativt kaos - elsker at være den koordinerende kraft der holder overblikket og samler folk om fællesmål.", needsDescription: "Ansvar for årshjul, planlægning og koordination af alle marketing aktiviteter", contribution: "Naturlig koordinator der trives som 'blæksprutte' for teams. Nyligt gennemført projektledelseskursus giver formelle værktøjer til min naturlige tilgang til problemløsning og koordination." },
       { name: "Tværfagligt Samarbejde", level: 5, description: "Jeg er god til at lytte til folk og samle dem om fællesmål. Rationel og fair tilgang gør koordination af teams naturligt for mig.", needsDescription: "Ugentlige møder med grafikere, fotografer, SoMe medarbejdere og koordination med eksterne samarbejdspartnere", contribution: "Hos Adjutant var jeg den, folk kom til når teams skulle koordineres og problemer løses. Min tilgang bygger på at lytte ordentligt og finde løsninger der virker for alle involverede." },
@@ -1071,6 +940,7 @@
       { name: "Digital Marketing Kanaler", level: 3, description: "Grundlæggende forståelse af digitale marketing platforme med stærk motivation for at udvikle kompetencer inden for Meta, WordPress og email marketing.", needsDescription: "Meta annoncering (Facebook & Instagram), WordPress hjemmesider, email-marketing og online kanaler", contribution: "Solid fundament i digitale platforme og hurtig til at tilegne mig nye værktøjer." },
       { name: "Ordrehåndtering", level: 4, description: "Nyt område med stor motivation for at lære festival marketing og forstå de særlige udfordringer ved event promotion og gæste-kunderejsen.", needsDescription: "Forståelse af festival marketing, billetsalg-marketing og gæste-kunderejsen fra awareness til post-event", contribution: "Mens jeg er ny i event marketing, bringer jeg struktureret tilgang og friske perspektiver." },
       { name: "Performance Tracking", level: 3, description: "Erfaring med performance måling og optimering gennem salgsdata analyse og kontinuerlig forbedring af processer.", needsDescription: "Systematisk tracking af marketing performance og ROI på tværs af alle kanaler", contribution: "Stærk motivation for at blive endnu dygtigere." },
+    ];
     function wrapRadarText(text, maxWidth, fontSize) {
       const words = text.split(" ");
       let line = "";
@@ -1153,7 +1023,6 @@
         point.onmouseleave = function() { document.querySelector('.skill-details').innerHTML = document.querySelector('.default-message').outerHTML; };
         point.onclick = function() { showSkillDetails(this.skillData); };
         svg.appendChild(point);
-
         var fontSize = 17;
         var maxWidth = 125;
         var labelRadius = maxRadius + 27;
@@ -1195,7 +1064,3 @@
   </script>
 </body>
 </html>
-
-
-
-
