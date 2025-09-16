@@ -933,15 +933,50 @@
     }
     window.toggleExperience = toggleExperience;
     // Radar chart JS
-    var skills = [
-      { name: "Projektledelse & Koordination", level: 4, description: "Jeg er som skrevet en god blanding af struktur og kreativt kaos - elsker at være den koordinerende kraft der holder overblikket og samler folk om fællesmål.", needsDescription: "Ansvar for årshjul, planlægning og koordination af alle marketing aktiviteter", contribution: "Naturlig koordinator der trives som 'blæksprutte' for teams. Nyligt gennemført projektledelseskursus giver formelle værktøjer til min naturlige tilgang til problemløsning og koordination." },
-      { name: "Tværfagligt Samarbejde", level: 5, description: "Jeg er god til at lytte til folk og samle dem om fællesmål. Rationel og fair tilgang gør koordination af teams naturligt for mig.", needsDescription: "Ugentlige møder med grafikere, fotografer, SoMe medarbejdere og koordination med eksterne samarbejdspartnere", contribution: "Hos Adjutant var jeg den, folk kom til når teams skulle koordineres og problemer løses. Min tilgang bygger på at lytte ordentligt og finde løsninger der virker for alle involverede." },
-      { name: "Markedsanalyse & Data", level: 4, description: "Dyb erfaring med markedsanalyse og datafortolkning fra arbejde med internationale brands og markedstendenser.", needsDescription: "Effektmålinger, analyser og datadrevet beslutningstagning for festival marketing", contribution: "Omfattende erfaring med at analysere markedsdata fra 50+ brands og omsætte insights til strategiske anbefalinger. Stærke Excel skills og evne til at identificere trends og muligheder." },
-      { name: "Visuel kommunikation", level: 4, description: "Solid erfaring med brand kommunikation og storytelling, særligt omkring værdier som bæredygtighed og fællesskab.", needsDescription: "Branding, identitet og kommunikation der skaber engagement omkring Mad & Kulturs værdier", contribution: "Erfaring med storytelling omkring bæredygtige værdier og community building. Evne til at kommunikere komplekse værdier på autentiske måder der resonerer med målgrupper." },
-      { name: "Digital Marketing Kanaler", level: 3, description: "Grundlæggende forståelse af digitale marketing platforme med stærk motivation for at udvikle kompetencer inden for Meta, WordPress og email marketing.", needsDescription: "Meta annoncering (Facebook & Instagram), WordPress hjemmesider, email-marketing og online kanaler", contribution: "Solid fundament i digitale platforme og hurtig til at tilegne mig nye værktøjer." },
-      { name: "Ordrehåndtering", level: 4, description: "Nyt område med stor motivation for at lære festival marketing og forstå de særlige udfordringer ved event promotion og gæste-kunderejsen.", needsDescription: "Forståelse af festival marketing, billetsalg-marketing og gæste-kunderejsen fra awareness til post-event", contribution: "Mens jeg er ny i event marketing, bringer jeg struktureret tilgang og friske perspektiver." },
-      { name: "Performance Tracking", level: 3, description: "Erfaring med performance måling og optimering gennem salgsdata analyse og kontinuerlig forbedring af processer.", needsDescription: "Systematisk tracking af marketing performance og ROI på tværs af alle kanaler", contribution: "Stærk motivation for at blive endnu dygtigere." },
-    ];
+var skills = [
+  {
+    name: "Projektledelse & Koordination",
+    level: 4,
+    description: "Jeg har solid erfaring med at hjælpe i at planlægge og følge op på projekter fra start til slut. Jeg arbejder struktureret og holder styr på både tidsplaner og ressourcer.",
+    needsDescription: "Projektkoordinering, processtyring og overblik gennem hele projektforløbet.",
+    contribution: "Jeg sikrer, at projekter holder retning og bliver afsluttet til tiden ved at følge op og justere løbende."
+  },
+  {
+    name: "Tværfagligt Samarbejde",
+    level: 5,
+    description: "Jeg er vant til at samarbejde med mange forskellige faggrupper og kulturer. Jeg formidler tekniske og komplekse emner, så alle forstår hinanden.",
+    needsDescription: "Samarbejde på tværs af teknik, salg, distribution og kundekontakt – ofte internationalt.",
+    contribution: "Jeg sørger for, at viden deles og at alle parter er opdaterede, så samarbejdet fungerer effektivt."
+  },
+  {
+    name: "Markedsanalyse & Data",
+    level: 4,
+    description: "Jeg arbejder rutineret med at analysere data og bruge resultaterne til at forbedre arbejdsprocesser. Jeg bruger blandt andet Excel til at skabe overblik og finde muligheder.",
+    needsDescription: "Løbende analyse og opfølgning på data for at sikre, at projekter og leverancer kører som de skal.",
+    contribution: "Jeg omsætter data til konkrete anbefalinger og handlinger, så vi kan tilpasse og optimere løbende."
+  },
+  {
+    name: "Visuel kommunikation",
+    level: 4,
+    description: "Jeg kan forklare tekniske løsninger med grafik og tekst, så det er let at forstå for både kolleger og kunder.",
+    needsDescription: "Udarbejdelse af visuelle materialer, der formidler tekniske løsninger på en overskuelig måde.",
+    contribution: "Jeg laver materialer, der gør det nemt at forstå og tage stilling til forslag og løsninger."
+  },
+  {
+    name: "Ordrehåndtering",
+    level: 4,
+    description: "Jeg har erfaring med at modtage og følge op på ordrer fra bestilling til levering. Jeg arbejder grundigt og følger op, hvis der sker ændringer.",
+    needsDescription: "Håndtering af ordrer, opfølgning på leveringstid og klar kommunikation om ændringer.",
+    contribution: "Jeg sikrer, at alle involverede løbende får besked om status, så der ikke opstår misforståelser."
+  },
+  {
+    name: "Performance Tracking",
+    level: 4,
+    description: "Jeg har praktisk erfaring med at følge op på både KPI’er og salgsdata og bruge resultaterne til at forbedre arbejdet.",
+    needsDescription: "Opfølgning på leverancer og processer, så projekter leveres som aftalt og i god kvalitet.",
+    contribution: "Jeg analyserer og rapporterer løbende, så vi kan tilpasse og forbedre processerne, hvis der er behov."
+  }
+];
     function wrapRadarText(text, maxWidth, fontSize) {
       const words = text.split(" ");
       let line = "";
@@ -1065,4 +1100,5 @@
   </script>
 </body>
 </html>
+
 
